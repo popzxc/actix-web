@@ -19,7 +19,7 @@ pub(crate) struct ConnectorConfig {
 impl Default for ConnectorConfig {
     fn default() -> Self {
         Self {
-            timeout: Duration::from_secs(100),
+            timeout: Duration::from_secs(1),
             conn_lifetime: Duration::from_secs(75),
             conn_keep_alive: Duration::from_secs(15),
             disconnect_timeout: Some(Duration::from_millis(3000)),

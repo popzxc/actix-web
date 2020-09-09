@@ -40,7 +40,7 @@ impl ClientBuilder {
             allow_redirects: true,
             max_redirects: 10,
             headers: HeaderMap::new(),
-            timeout: Some(Duration::from_secs(100)),
+            timeout: Some(Duration::from_secs(5)),
             connector: None,
             max_http_version: None,
             stream_window_size: None,
