@@ -22,7 +22,7 @@ name = "actix_http"
 path = "src/lib.rs"
 
 [features]
-default = []
+default = ["rustls"]
 
 # openssl
 openssl = ["actix-tls/openssl", "actix-connect/openssl"]

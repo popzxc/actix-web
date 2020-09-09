@@ -274,6 +274,8 @@ where
             use actix_connect::ssl::rustls::{RustlsConnector, Session};
             use actix_service::{boxed::service, pipeline};
 
+            log::info!("BUILDING SSL ");
+
             let ssl_service = TimeoutService::new(
                 self.config.timeout,
                 pipeline(
@@ -306,6 +308,7 @@ where
                         RustlsConnector::service(ssl)
                             .map_err(ConnectError::from)
                             .map(|stream| {
+                                log::info!("STREAM: {:?}", stream);
                                 let sock = stream.into_parts().0;
                                 let h2 = sock
                                     .get_ref()
@@ -313,6 +316,7 @@ where
                                     .get_alpn_protocol()
                                     .map(|protos| protos.windows(2).any(|w| w == H2))
                                     .unwrap_or(false);
+                                log::info!("H2: {:?}", h2);
                                 if h2 {
                                     (Box::new(sock) as Box<dyn Io>, Protocol::Http2)
                                 } else {
